@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>iMagicTools</title>
+    <link rel="stylesheet" type="text/css" href="../css/index.css">
+    <style>
+        :root {
+            --top-space: 0px;
+            --container-space: 15px;
+            --main-horizontal-space: 25px;
+            --triangle-size: 8px;
+            --center-font-size: 24px;
+            --countdown-font-size: 18px;
+            --sub-font-size: 16px;
+            --corner-font-size: 16px;
+            --global-border-radius: 30px;
+            --global-bg-opacity: 0.5;
+            --container-bg-padding: 12px 20px;
+            --countdown-bg-padding: 8px 15px;
+            --divider-width: 2px;
+            --divider-margin: 0 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="globalContainer">
+        <div class="background">
+            <div class="classContainer" id="classContainer"></div>
+        </div>
+        <div class="countdownContainer" id="countdownContainer">
+            <div class="countdowner">
+                <div id="currentFullName" class="currentClass"></div>
+                <div id="countdownText" class="countdown"></div>
+                <div class="corner" id="currentWeekCH"></div>
+                <div class="weather" id="weather">正在加载天气...</div>
+            </div>
+        </div>
+        <div id="sentence" class="sentence">欢迎使用 iMagicTools! | Made by GPUawa</div>
+    </div>
+    <script src="../js/schedule.js"></script>
+</body>
+
+</html>

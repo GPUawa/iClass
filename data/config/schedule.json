@@ -1,0 +1,232 @@
+{
+    "version": 1,
+    "subjects": [
+        {
+            "name": "语文",
+            "simplified_name": "语",
+            "teacher": "",
+            "room": ""
+        },
+        {
+            "name": "数学",
+            "simplified_name": "数",
+            "teacher": "",
+            "room": ""
+        },
+        {
+            "name": "英语",
+            "simplified_name": "英",
+            "teacher": "",
+            "room": ""
+        },
+        {
+            "name": "物理",
+            "simplified_name": "物",
+            "teacher": "",
+            "room": ""
+        },
+        {
+            "name": "化学",
+            "simplified_name": "化",
+            "teacher": "",
+            "room": ""
+        },
+        {
+            "name": "生物",
+            "simplified_name": "生",
+            "teacher": "",
+            "room": ""
+        },
+        {
+            "name": "历史",
+            "simplified_name": "历",
+            "teacher": "",
+            "room": ""
+        },
+        {
+            "name": "地理",
+            "simplified_name": "地",
+            "teacher": "",
+            "room": ""
+        },
+        {
+            "name": "政治",
+            "simplified_name": "政",
+            "teacher": "",
+            "room": ""
+        },
+        {
+            "name": "班会",
+            "simplified_name": "班",
+            "teacher": "",
+            "room": ""
+        },
+        {
+            "name": "信息",
+            "simplified_name": "信",
+            "room": "",
+            "teacher": ""
+        },
+        {
+            "name": "早读",
+            "simplified_name": "",
+            "room": "",
+            "teacher": ""
+        },
+        {
+            "name": "体育"
+        },
+        {
+            "name": "自习"
+        },
+        {
+            "name": "社团"
+        }
+    ],
+    "schedules": [
+        {
+            "name": "All_Thursday",
+            "classes": [
+                {
+                    "subject": "早读",
+                    "start_time": "07:30",
+                    "end_time": "07:55"
+                },
+                {
+                    "subject": "数学",
+                    "start_time": "08:00",
+                    "end_time": "08:40"
+                },
+                {
+                    "subject": "语文",
+                    "start_time": "08:55",
+                    "end_time": "09:35"
+                },
+                {
+                    "subject": "英语",
+                    "start_time": "10:05",
+                    "end_time": "10:45"
+                },
+                {
+                    "subject": "体育",
+                    "start_time": "11:00",
+                    "end_time": "11:40"
+                },
+                {
+                    "subject": "自习",
+                    "start_time": "12:10",
+                    "end_time": "12:55"
+                },
+                {
+                    "subject": "历史",
+                    "start_time": "13:00",
+                    "end_time": "13:40"
+                },
+                {
+                    "subject": "政治",
+                    "start_time": "13:55",
+                    "end_time": "14:35"
+                },
+                {
+                    "subject": "生物",
+                    "start_time": "14:50",
+                    "end_time": "15:30"
+                },
+                {
+                    "subject": "自习",
+                    "start_time": "15:40",
+                    "end_time": "16:20"
+                },
+                {
+                    "subject": "社团",
+                    "start_time": "16:40",
+                    "end_time": "17:20"
+                },
+                {
+                    "subject": "自习",
+                    "start_time": "18:30",
+                    "end_time": "21:00"
+                },
+                {
+                    "subject": "自习",
+                    "start_time": "21:05",
+                    "end_time": "22:00"
+                }
+            ],
+            "enable_day": 4,
+            "weeks": "all"
+        },
+        {
+            "name": "All_Friday",
+            "classes": [
+                {
+                    "subject": "早读",
+                    "start_time": "07:30",
+                    "end_time": "07:55"
+                },
+                {
+                    "subject": "数学",
+                    "start_time": "08:00",
+                    "end_time": "08:40"
+                },
+                {
+                    "subject": "语文",
+                    "start_time": "08:55",
+                    "end_time": "09:35"
+                },
+                {
+                    "subject": "英语",
+                    "start_time": "10:05",
+                    "end_time": "10:45"
+                },
+                {
+                    "subject": "体育",
+                    "start_time": "11:00",
+                    "end_time": "11:40"
+                },
+                {
+                    "subject": "自习",
+                    "start_time": "12:10",
+                    "end_time": "12:55"
+                },
+                {
+                    "subject": "历史",
+                    "start_time": "13:00",
+                    "end_time": "13:40"
+                },
+                {
+                    "subject": "政治",
+                    "start_time": "13:55",
+                    "end_time": "14:35"
+                },
+                {
+                    "subject": "生物",
+                    "start_time": "14:50",
+                    "end_time": "15:30"
+                },
+                {
+                    "subject": "自习",
+                    "start_time": "15:40",
+                    "end_time": "16:20"
+                },
+                {
+                    "subject": "社团",
+                    "start_time": "16:40",
+                    "end_time": "17:20"
+                },
+                {
+                    "subject": "自习",
+                    "start_time": "18:30",
+                    "end_time": "21:00"
+                },
+                {
+                    "subject": "自习",
+                    "start_time": "21:05",
+                    "end_time": "22:00"
+                }
+            ],
+            "enable_day": 5,
+            "weeks": "all"
+        }
+    ]
+}
