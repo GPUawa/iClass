@@ -1,6 +1,6 @@
 {
     "name": "iclass",
-    "version": "0.9.9",
+    "version": "0.9.0",
     "description": "一个简单的教室大屏工具",
     "main": "src/main/main.js",
     "scripts": {
@@ -28,6 +28,11 @@
             "icon": "src/assets/img/logo.ico"
         }
     },
+    "nsis": {
+        "oneClick": false,
+        "allowToChangeInstallationDirectory": true,
+        "perMachine": false
+    },
     "files": [
         "**/*",
         "!node_modules/**/*"
@@ -42,9 +47,8 @@
         "target": "AppImage"
     },
     "devDependencies": {
-        "electron": "^34.2.0",
+        "electron": "22.3.9",
         "electron-builder": "^25.1.8"
     },
-    "dependencies": {
-    }
+    "dependencies": {}
 }
