@@ -2,7 +2,7 @@
 
 初一牲开发，代码质量不行请见谅 🌹
 
-![iClass](https://forum.smart-teach.cn/assets/files/2025-02-27/1740663162-438641-2025-02-27-213229-493.png)
+![iClass](https://pic.imgdd.cc/item/67e3fa87218de299ca987621.png)
 
 一个简单的 ~~Electron~~ Tauri 教室大屏工具
 
