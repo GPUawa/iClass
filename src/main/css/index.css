@@ -1,11 +1,23 @@
 @font-face {
     font-family: JETB;
-    src: url("../../assets/fonts/JETBRAINSMONO-BOLD.TTF");
+    src: url("../../assets/fonts/JetBrainsMono-Bold.ttf");
 }
 
 @font-face {
     font-family: SOU;
     src: url("./../assets/fonts/SourceHanSansCN-Bold.otf");
+}
+
+@keyframes blink {
+    0% {
+        color: rgb(255, 180, 0);
+    }
+    50% {
+        color: white;
+    }
+    100% {
+        color: rgb(255, 180, 0);
+    }
 }
 
 * {
@@ -57,7 +69,8 @@
 }
 
 .current {
-    color: rgba(0, 255, 10, 1);
+    color: rgba(0, 255, 10, 1) !important;
+    animation: none !important;
 }
 
 .upcoming {
@@ -81,8 +94,6 @@
     font-family: SOU;
     font-size: 25px;
     font-weight: bold;
-    padding: var(--container-bg-padding);
-    width: auto;
     text-align: center;
 }
 
@@ -98,7 +109,6 @@
     display: inline;
     font-family: SOU;
     font-size: 25px;
-    transition: all 2s;
     font-weight: bold;
 }
 
@@ -148,7 +158,8 @@
 }
 
 .nextClass {
-    color: rgb(255, 210, 0);
+    color: rgb(255, 180, 0);
+    animation: blink 2s infinite;
 }
 
 .weather {
