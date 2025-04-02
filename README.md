@@ -9,7 +9,7 @@
 > iClass 1.0.0 将会迁移到 Tauri ，但是 Windows 7 将有 Electron 特供版（难不成你要每次启动前还要装 Webview ?）
 
 ## ⚙ Work In Progress
-- 尝试 Tauri
+- 重构中，清明出 Tauri 的预发布版 v0.9.1-b，以后的 9 个 v0 系版本都将会逐渐更改 UI
 
 ## 📝 以后的目标
 
