@@ -7,7 +7,7 @@
 一个简单的 ~~Electron~~ Tauri 教室大屏工具
 
 ## ⚙ Work In Progress
-- 正在迁移至 Tauri
+- ~~正在迁移至 Tauri~~ 这得延后了，根据使用的表现来看，得先把 UI 重构
 
 ## 📝 以后的目标
 
