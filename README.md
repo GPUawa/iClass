@@ -1,19 +1,7 @@
-# iClass - 原 ECS++, iMagicTools
+# <p align="center"><image src="src-tauri/icons/icon.png" height="28" width="28"/> iClass
 
-![iClass](https://pic.imgdd.cc/item/67e3fa87218de299ca987621.png)
+<p align="center"><image src="src/assets/img/readme.png" height="256" width="256"/>
 
-初一牲开发，代码质量不行请见谅 🌹
+<p align="center">一个使用 Tauri 和 Vue 3 构建的教室大屏实用工具箱。</p>
 
-一个简单的 Electron 教室大屏工具
-
-## ⚙ Work In Progress
-- 暑假发布正式版 1.x.x
-
-## 📝 以后的目标
-
-- 控件自定义 ~~软件是我用的，我想让他怎样就怎样~~
-- 减小屏幕占用面积 ~~界面逐渐 CI 化~~
-
-## 🤣 丢人现眼
-
-[![Star 历史](https://starchart.cc/gpuawa/iClass.svg?variant=adaptive)](https://starchart.cc/gpuawa/iClass)
+~~0.x.x 皆为应对比赛的测试版，做的比较仓促~~
