@@ -1,6 +1,9 @@
-import { contextBridge } from 'electron'
+const { contextBridge, ipcRenderer } = require('electron')
 
-contextBridge.exposeInMainWorld('scheduleAPI', {
-    getConfig: () => ipcRenderer.invoke('get-schedule-config'),
-    getTodayClasses: () => ipcRenderer.invoke('get-today-classes')
+// 课表 api
+contextBridge.exposeInMainWorld('electronAPI', {
+    schedule: {
+        getTodayClasses: (date) => ipcRenderer.invoke('schedule:getTodayClasses', date),
+        reload: () => ipcRenderer.invoke('schedule:reload')
+    }
 })
