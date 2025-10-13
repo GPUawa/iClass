@@ -1,13 +1,11 @@
 {
     "name": "iclass",
     "version": "1.0.0",
-    "description": "An Electron application with Vue",
+    "description": "一个使用 Electron 和 Vue 3 构建的教室大屏实用工具箱。",
     "main": "./out/main/index.js",
-    "author": "example.com",
-    "homepage": "https://electron-vite.org",
+    "author": "GPUawa",
+    "homepage": "https://github.com/gpuawa/iClass",
     "scripts": {
-        "format": "prettier --write .",
-        "lint": "eslint --cache .",
         "start": "electron-vite preview",
         "dev": "electron-vite dev",
         "build": "electron-vite build",
