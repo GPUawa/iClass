@@ -1,20 +1,31 @@
-/* 确保html和body元素也是透明的 */
-html,
-body {
-    background-color: transparent !important;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+.header-bars {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    position: fixed;
+    top: 20px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
 }
 
-/* 移除所有可能的不透明背景 */
-#app {
-    background-color: transparent !important;
+.weather {
+    width: 120px;
+    height: 60px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
 }
 
-/* 如果你的内容容器有背景色，也需要移除 */
-.schedule-container {
-    background-color: transparent !important;
+.time {
+    width: 120px;
+    height: 60px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+}
+
+.schedule {
+    width: 120px;
+    height: 60px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
 }

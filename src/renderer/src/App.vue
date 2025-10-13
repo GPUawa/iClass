@@ -1,7 +1,11 @@
 <script setup>
-
+import './assets/main.css'
 </script>
 
 <template>
-    <div class="text">Hello, iClass!</div>
+    <div class="header-bars">
+        <div class="weather"></div>
+        <div class="time"></div>
+        <div class="schedule"></div>
+    </div>
 </template>

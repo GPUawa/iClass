@@ -8,6 +8,8 @@ import { app, shell, BrowserWindow, ipcMain, screen, Menu, Tray } from 'electron
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import PluginSystem from './pluginLoader'
+import ThemeSystem from './themeLoader'
 
 // 创建主窗口
 function createWindow() {
@@ -26,7 +28,7 @@ function createWindow() {
             preload: join(__dirname, '../preload/index.js'),
             sandbox: false,
             nodeIntegration: false,
-            contextIsolation: true,
+            contextIsolation: false,
             enableRemoteModule: true
         }
     })
@@ -53,7 +55,7 @@ function createWindow() {
 
 // 任务栏托盘图标
 function createTray() {
-    const tray = new Tray('resources/icon.png');
+    const tray = new Tray(join(__dirname, '../../resources/icon.png'))
 
     const contextMenu = Menu.buildFromTemplate([
         {
@@ -70,14 +72,19 @@ function createTray() {
 }
 
 // 创建窗口
-app.whenReady().then(() => {
+app.whenReady().then(async() => {
     electronApp.setAppUserModelId('gpuawa.iClass')
 
     app.on('browser-window-created', (_, window) => {
         optimizer.watchWindowShortcuts(window)
     })
 
-    // ipcMain.on('ping', () => console.log('pong'))
+    await PluginSystem.initAllPlugins()
+    PluginSystem.setupIPCHandlers()
+  
+    await ThemeSystem.loadAllThemes()
+    ThemeSystem.setupIPCHandlers()
+    ThemeSystem.applyTheme('default') // 应用默认主题
 
     createWindow()
     createTray()
