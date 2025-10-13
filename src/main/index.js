@@ -72,19 +72,19 @@ function createTray() {
 }
 
 // 创建窗口
-app.whenReady().then(async() => {
+app.whenReady().then(async () => {
     electronApp.setAppUserModelId('gpuawa.iClass')
 
     app.on('browser-window-created', (_, window) => {
         optimizer.watchWindowShortcuts(window)
     })
 
-    await PluginSystem.initAllPlugins()
-    PluginSystem.setupIPCHandlers()
-  
-    await ThemeSystem.loadAllThemes()
-    ThemeSystem.setupIPCHandlers()
-    ThemeSystem.applyTheme('default') // 应用默认主题
+    // await PluginSystem.initAllPlugins()
+    // PluginSystem.setupIPCHandlers()
+
+    // await ThemeSystem.loadAllThemes()
+    // ThemeSystem.setupIPCHandlers()
+    // ThemeSystem.applyTheme('default')
 
     createWindow()
     createTray()
