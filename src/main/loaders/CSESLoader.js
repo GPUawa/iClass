@@ -9,9 +9,9 @@ import fs from 'fs'
 import yaml from 'js-yaml'
 import { join } from 'path'
 
-export class ScheduleLoader {
+export class csesLoader {
     constructor() {
-        this.configPath = join(__dirname, '../../configs/schedule.yaml')
+        this.configPath = join(__dirname, '../../data/configs/schedule.yaml')
         this.loadSchedule()
     }
     // 加载课表文件
