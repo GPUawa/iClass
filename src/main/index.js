@@ -10,6 +10,7 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import { csesLoader } from './loaders/csesLoader.js'
 import icon from '../../resources/images/icon.png?asset'
+const https = require('https')
 
 let cses
 
@@ -74,6 +75,30 @@ function registerIPC() {
     ipcMain.handle('schedule:reload', () => {
         cses.loadSchedule()
         return true
+    })
+    ipcMain.handle('weather:getTodayWeather', async () => {
+        return new Promise((resolve, reject) => {
+            const url = 'https://weatherapi.market.xiaomi.com/wtr-v3/weather/all?latitude=0&longitude=0&locationKey=weathercn%3A101010100&appKey=weather20151024&sign=zUFJoAR2ZVrDy1vF3D07&isGlobal=false&locale=zh_cn'
+
+            https.get(url, (response) => {
+                let data = ''
+
+                response.on('data', (chunk) => {
+                    data += chunk
+                })
+
+                response.on('end', () => {
+                    try {
+                        const weatherData = JSON.parse(data)
+                        resolve(weatherData)
+                    } catch (error) {
+                        reject(new Error('解析天气数据失败: ' + error.message))
+                    }
+                })
+            }).on('error', (error) => {
+                reject(new Error('网络请求失败: ' + error.message))
+            })
+        })
     })
 }
 
