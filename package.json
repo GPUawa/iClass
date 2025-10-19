@@ -1,64 +1,54 @@
 {
     "name": "iclass",
-    "version": "1.0.0",
-    "description": "iClass",
-    "main": "./out/main/index.js",
-    "author": "GPUawa",
-    "homepage": "https://github.com/gpuawa/iClass",
+    "version": "0.9.1",
+    "description": "一个简单的教室大屏工具",
+    "main": "src/main/main.js",
     "scripts": {
-        "start": "electron-vite preview",
-        "dev": "electron-vite dev",
-        "build": "electron-vite build",
-        "postinstall": "electron-builder install-app-deps",
-        "build:unpack": "npm run build && electron-builder --dir",
-        "build:win": "npm run build && electron-builder --win",
-        "build:mac": "npm run build && electron-builder --mac",
-        "build:linux": "npm run build && electron-builder --linux"
+        "run": "electron .",
+        "build": "electron-builder"
     },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/gpuawa/iclass.git"
+    },
+    "author": "GPUawa",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/gpuawa/iclass/issues"
+    },
+    "homepage": "https://github.com/gpuawa/iclass#readme",
     "build": {
-        "extraResources": [
-            {
-                "from": "src/plugins",
-                "to": "plugins",
-                "filter": [
-                    "**/*"
-                ]
-            },
-            {
-                "from": "src/themes",
-                "to": "themes",
-                "filter": [
-                    "**/*"
-                ]
-            },
-            {
-                "from": "configs",
-                "to": "configs",
-                "filter": [
-                    "**/*"
-                ]
-            }
-        ]
+        "appId": "gpuawa.iclass",
+        "productName": "iClass",
+        "asar": false,
+        "directories": {
+            "output": "dist"
+        },
+        "win": {
+            "icon": "src/assets/img/logo.ico"
+        }
     },
-    "dependencies": {
-        "@electron-toolkit/preload": "^3.0.2",
-        "@electron-toolkit/utils": "^4.0.0",
-        "electron-updater": "^6.3.9",
-        "js-yaml": "^4.1.0"
+    "nsis": {
+        "oneClick": false,
+        "allowToChangeInstallationDirectory": true,
+        "perMachine": false
+    },
+    "files": [
+        "**/*",
+        "!node_modules/**/*"
+    ],
+    "mac": {
+        "target": "dmg"
+    },
+    "win": {
+        "target": "nsis"
+    },
+    "linux": {
+        "target": "AppImage"
     },
     "devDependencies": {
-        "@electron-toolkit/eslint-config": "^2.1.0",
-        "@electron-toolkit/eslint-config-prettier": "^3.0.0",
-        "@types/js-yaml": "^4.0.9",
-        "@vitejs/plugin-vue": "^6.0.1",
-        "electron": "^22.3.27",
-        "electron-builder": "^25.1.8",
-        "electron-vite": "^4.0.1",
-        "eslint": "^9.36.0",
-        "eslint-plugin-vue": "^10.4.0",
-        "prettier": "^3.6.2",
-        "vite": "^7.1.6",
-        "vue": "^3.5.21",
-        "vue-eslint-parser": "^10.2.0"
-    }
+        "electron": "22.3.9",
+        "electron-builder": "^25.1.8"
+    },
+    "dependencies": {}
 }
