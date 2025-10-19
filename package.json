@@ -16,6 +16,16 @@
         "build:linux": "npm run build && electron-builder --linux"
     },
     "build": {
+        "nsis": {
+            "oneClick": false,
+            "allowToChangeInstallationDirectory": true,
+            "installerIcon": "build/icon.ico",
+            "uninstallerIcon": "build/icon.ico",
+            "createDesktopShortcut": true,
+            "createStartMenuShortcut": true,
+            "shortcutName": "iClass"
+        },
+        "artifactName": "iClass-${version}-${platform}-${arch}.${ext}",
         "extraResources": [
             {
                 "from": "data",
