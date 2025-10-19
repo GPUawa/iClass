@@ -8,7 +8,7 @@
 import { app, shell, BrowserWindow, ipcMain, screen, Menu, Tray } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-import { csesLoader } from './loaders/csesLoader'
+import { csesLoader } from './loaders/csesLoader.js'
 import icon from '../../resources/icon.png?asset'
 
 let cses
