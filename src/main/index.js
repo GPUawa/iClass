@@ -8,10 +8,10 @@
 import { app, shell, BrowserWindow, ipcMain, screen, Menu, Tray } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-import { ScheduleLoader } from './CSESLoader.js'
+import { csesLoader } from './loaders/CSESLoader'
 import icon from '../../resources/icon.png?asset'
 
-let scheduleLoader
+let cses
 
 // 创建窗口
 function createWindow() {
@@ -69,17 +69,17 @@ function createTray() {
 function registerIPC() {
     ipcMain.handle('schedule:getTodayClasses', (_, dateString) => {
         const date = dateString ? new Date(dateString) : new Date()
-        return scheduleLoader.getTodayClasses(date)
+        return cses.getTodayClasses(date)
     })
     ipcMain.handle('schedule:reload', () => {
-        scheduleLoader.loadSchedule()
+        cses.loadSchedule()
         return true
     })
 }
 
 app.whenReady().then(() => {
     electronApp.setAppUserModelId('gpuawa.iClass')
-    scheduleLoader = new ScheduleLoader()
+    cses = new csesLoader()
 
     registerIPC()
 
