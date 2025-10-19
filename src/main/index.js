@@ -9,7 +9,7 @@ import { app, shell, BrowserWindow, ipcMain, screen, Menu, Tray } from 'electron
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import { csesLoader } from './loaders/csesLoader.js'
-import icon from '../../resources/icon.png?asset'
+import icon from '../../resources/images/icon.png?asset'
 
 let cses
 
@@ -56,7 +56,7 @@ function createWindow() {
 
 // 创建系统托盘
 function createTray() {
-    const tray = new Tray(join(__dirname, '../../resources/icon.png'))
+    const tray = new Tray(join(__dirname, '../../resources/images/icon.png'))
     const contextMenu = Menu.buildFromTemplate([
         { type: 'separator' },
         { label: '❌ 退出软件', role: 'quit' }
