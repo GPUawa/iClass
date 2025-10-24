@@ -19,7 +19,6 @@ const todaySchedule = computed(() => {
     }).join(' ')
 })
 
-// 从后端获取今日课程
 const fetchTodayClasses = async () => {
     try {
         loading.value = true
@@ -50,13 +49,12 @@ const fetchTodayWeather = async () => {
         if (!weatherData) {
             throw new Error('获取天气数据失败');
         }
-        const temperatureData = weatherData?.forecastDaily?.temperature;
-        if (!temperatureData?.value?.length) {
+        const currentTemp = weatherData?.current?.temperature?.value;
+        if (currentTemp === undefined || currentTemp === null) {
             throw new Error('温度数据不可用');
         }
-        const todayTemp = temperatureData.value[0];
 
-        todayWeather.value = `${todayTemp.from}℃ ~ ${todayTemp.to}℃`;
+        todayWeather.value = `${currentTemp}℃`;
     } catch (error) {
         todayWeather.value = '天气获取失败';
     }
@@ -85,10 +83,11 @@ onMounted(async () => {
         <div class="weather">{{ todayWeather }}</div>
         <div class="schedule">{{ todaySchedule }}</div>
         <div class="time">
-            {{ (currentDate.getMonth() + 1).toString().padStart(2, '0') }}/{{
+            {{ currentDate.toLocaleTimeString('zh-CN',
+                { hour: '2-digit', minute: '2-digit', hour12: false }) }} | {{ (currentDate.getMonth() +
+                1).toString().padStart(2, '0') }}/{{
                 currentDate.getDate().toString().padStart(2, '0') }} 周{{ ['日', '一', '二', '三', '四', '五',
-                '六'][currentDate.getDay()] }} {{ currentDate.toLocaleTimeString('zh-CN',
-                { hour: '2-digit', minute: '2-digit', hour12: false }) }}
+                '六'][currentDate.getDay()] }}
         </div>
     </div>
 </template>
