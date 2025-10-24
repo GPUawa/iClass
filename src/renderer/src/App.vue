@@ -19,7 +19,6 @@ const todaySchedule = computed(() => {
     }).join(' ')
 })
 
-// 从后端获取今日课程
 const fetchTodayClasses = async () => {
     try {
         loading.value = true
@@ -85,10 +84,11 @@ onMounted(async () => {
         <div class="weather">{{ todayWeather }}</div>
         <div class="schedule">{{ todaySchedule }}</div>
         <div class="time">
-            {{ (currentDate.getMonth() + 1).toString().padStart(2, '0') }}/{{
+            {{ currentDate.toLocaleTimeString('zh-CN',
+                { hour: '2-digit', minute: '2-digit', hour12: false }) }} | {{ (currentDate.getMonth() +
+                1).toString().padStart(2, '0') }}/{{
                 currentDate.getDate().toString().padStart(2, '0') }} 周{{ ['日', '一', '二', '三', '四', '五',
-                '六'][currentDate.getDay()] }} {{ currentDate.toLocaleTimeString('zh-CN',
-                { hour: '2-digit', minute: '2-digit', hour12: false }) }}
+                '六'][currentDate.getDay()] }}
         </div>
     </div>
 </template>
