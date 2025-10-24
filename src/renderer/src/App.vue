@@ -46,15 +46,20 @@ const checkDateChange = () => {
 const fetchTodayWeather = async () => {
     try {
         const weatherData = await window.electronAPI.fetchWeather();
-        if (!weatherData) {
+        if (!weatherData || weatherData.status !== 200) {
             throw new Error('获取天气数据失败');
         }
-        const currentTemp = weatherData?.current?.temperature?.value;
-        if (currentTemp === undefined || currentTemp === null) {
-            throw new Error('温度数据不可用');
+        const todayForecast = weatherData?.data?.forecast?.[0];
+        if (!todayForecast) {
+            throw new Error('天气预报数据不可用');
         }
 
-        todayWeather.value = `${currentTemp}℃`;
+        // 提取天气类型、最高温和最低温
+        const weatherType = todayForecast.type;
+        const highTemp = todayForecast.high.replace('高温 ', '').replace('℃', '');
+        const lowTemp = todayForecast.low.replace('低温 ', '').replace('℃', '');
+
+        todayWeather.value = `${weatherType} ${highTemp}~${lowTemp}℃`;
     } catch (error) {
         todayWeather.value = '天气获取失败';
     }

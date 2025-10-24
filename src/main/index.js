@@ -11,6 +11,7 @@ import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import { csesLoader } from './loaders/csesLoader.js'
 import icon from '../../resources/images/icon.png?asset'
 const https = require('https')
+const http = require('http')
 
 let cses
 
@@ -76,11 +77,12 @@ function registerIPC() {
         cses.loadSchedule()
         return true
     })
+
     ipcMain.handle('weather:getTodayWeather', async () => {
         return new Promise((resolve, reject) => {
-            const url = 'https://weatherapi.market.xiaomi.com/wtr-v3/weather/all?latitude=0&longitude=0&locationKey=weathercn%3A101010100&appKey=weather20151024&sign=zUFJoAR2ZVrDy1vF3D07&isGlobal=false&locale=zh_cn'
+            const url = 'http://t.weather.sojson.com/api/weather/city/101190401'
 
-            https.get(url, (response) => {
+            http.get(url, (response) => {
                 let data = ''
 
                 response.on('data', (chunk) => {
