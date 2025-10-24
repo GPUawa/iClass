@@ -54,14 +54,39 @@ function createWindow() {
     } else {
         mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
     }
+
+    // 保存窗口引用以便全局访问
+    global.mainWindow = mainWindow
+
+    return mainWindow
+}
+
+// 显示/隐藏窗口功能
+function showHideWindow() {
+    if (!global.mainWindow) return
+
+    if (global.mainWindow.isVisible()) {
+        global.mainWindow.hide()
+    } else {
+        global.mainWindow.show()
+    }
 }
 
 // 创建系统托盘
 function createTray() {
     const tray = new Tray(join(__dirname, '../../resources/images/icon.png'))
     const contextMenu = Menu.buildFromTemplate([
+        {
+            label: '👀 显示/隐藏',
+            click: () => {
+                showHideWindow()
+            }
+        },
         { type: 'separator' },
-        { label: '❌ 退出软件', role: 'quit' }
+        {
+            label: '❌ 退出程序', 
+            role: 'quit' 
+        }
     ])
     tray.setToolTip('iClass')
     tray.setContextMenu(contextMenu)
@@ -102,6 +127,23 @@ function registerIPC() {
             })
         })
     })
+
+    // 添加显示/隐藏窗口的IPC处理程序
+    ipcMain.handle('window:toggle', () => {
+        if (!global.mainWindow) return { success: false, error: '窗口不存在' }
+
+        try {
+            if (global.mainWindow.isVisible()) {
+                global.mainWindow.hide()
+                return { success: true, visible: false }
+            } else {
+                global.mainWindow.show()
+                return { success: true, visible: true }
+            }
+        } catch (error) {
+            return { success: false, error: error.message }
+        }
+    })
 }
 
 app.whenReady().then(() => {
@@ -116,4 +158,13 @@ app.whenReady().then(() => {
 
     createWindow()
     createTray()
+})
+
+// 确保在所有窗口关闭时退出应用
+app.on('window-all-closed', () => {
+    // 在macOS上，除非用户使用Cmd + Q明确退出
+    // 否则保持应用和菜单栏处于活动状态
+    if (process.platform !== 'darwin') {
+        app.quit()
+    }
 })
