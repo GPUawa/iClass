@@ -65,11 +65,8 @@ function createWindow() {
 function showHideWindow() {
     if (!global.mainWindow) return
 
-    if (global.mainWindow.isVisible()) {
-        global.mainWindow.hide()
-    } else {
-        global.mainWindow.show()
-    }
+    // 发送消息给渲染进程，让其控制界面显示/隐藏
+    global.mainWindow.webContents.send('toggle-app-visibility')
 }
 
 // 创建系统托盘
@@ -133,13 +130,9 @@ function registerIPC() {
         if (!global.mainWindow) return { success: false, error: '窗口不存在' }
 
         try {
-            if (global.mainWindow.isVisible()) {
-                global.mainWindow.hide()
-                return { success: true, visible: false }
-            } else {
-                global.mainWindow.show()
-                return { success: true, visible: true }
-            }
+            // 发送消息给渲染进程，让其控制界面显示/隐藏
+            global.mainWindow.webContents.send('toggle-app-visibility')
+            return { success: true }
         } catch (error) {
             return { success: false, error: error.message }
         }
