@@ -7,10 +7,7 @@ import { useSchedule } from './composables/useSchedule.js'
 
 const headerVisible = ref(false)
 
-// 使用天气相关的composable
 const { todayWeather, weatherIcon, fetchTodayWeather } = useWeather()
-
-// 使用课表相关的composable
 const { currentDate, todaySchedule, fetchTodayClasses, checkDateChange } = useSchedule()
 
 onMounted(async () => {
@@ -33,7 +30,7 @@ onMounted(async () => {
 
 <template>
     <div class="header-bars" :class="{ visible: headerVisible }">
-        <div class="weather"><i :class="`qi qi-${weatherIcon}`" v-if="weatherIcon"></i>&nbsp;&nbsp;&nbsp;{{ todayWeather }}</div>
+        <div class="weather"><i :class="`qi qi-${weatherIcon}`" v-if="weatherIcon"></i>&nbsp{{ todayWeather }}</div>
         <div class="schedule">{{ todaySchedule }}</div>
         <div class="time">
             {{ currentDate.toLocaleTimeString('zh-CN',
