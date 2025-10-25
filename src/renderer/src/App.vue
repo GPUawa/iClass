@@ -54,14 +54,3 @@ onMounted(async () => {
         </div>
     </div>
 </template>
-
-<style>
-.app-container {
-    transition: opacity 0.2s ease;
-}
-
-.app-hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-</style>

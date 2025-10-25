@@ -57,3 +57,12 @@
 .time {
     animation-delay: 0.3s;
 }
+
+.app-container {
+    transition: opacity 0.2s ease;
+}
+
+.app-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
