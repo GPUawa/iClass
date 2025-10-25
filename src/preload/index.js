@@ -6,7 +6,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
         reload: () => ipcRenderer.invoke('schedule:reload')
     },
     fetchWeather: () => ipcRenderer.invoke('weather:getTodayWeather'),
-    // 添加显示/隐藏应用的接口
     onToggleAppVisibility: (callback) => {
         ipcRenderer.on('toggle-app-visibility', callback)
     },
