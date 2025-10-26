@@ -81,8 +81,8 @@ function createTray() {
         },
         { type: 'separator' },
         {
-            label: '❌ 退出程序', 
-            role: 'quit' 
+            label: '❌ 退出程序',
+            role: 'quit'
         }
     ])
     tray.setToolTip('iClass')
