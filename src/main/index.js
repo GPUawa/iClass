@@ -102,9 +102,9 @@ function registerIPC() {
 
     ipcMain.handle('weather:getTodayWeather', async () => {
         return new Promise((resolve, reject) => {
-            const url = 'http://t.weather.sojson.com/api/weather/city/101190401'
+            const url = 'https://weatherapi.market.xiaomi.com/wtr-v3/weather/all?latitude=0&longitude=0&locationKey=weathercn%3A101010100&appKey=weather20151024&sign=zUFJoAR2ZVrDy1vF3D07&isGlobal=false&locale=zh_cn'
 
-            http.get(url, (response) => {
+            https.get(url, (response) => {
                 let data = ''
 
                 response.on('data', (chunk) => {
@@ -114,7 +114,58 @@ function registerIPC() {
                 response.on('end', () => {
                     try {
                         const weatherData = JSON.parse(data)
-                        resolve(weatherData)
+
+                        // 天气代码到天气类型的映射函数
+                        function getWeatherType(code) {
+                            const weatherMap = {
+                                '0': '晴',
+                                '1': '多云',
+                                '2': '少云',
+                                '3': '晴间多云',
+                                '4': '阴',
+                                '7': '小雨',
+                                '8': '中雨',
+                                '9': '大雨',
+                                '10': '暴雨',
+                                '13': '雪',
+                                '14': '小雪',
+                                '15': '中雪',
+                                '16': '大雪',
+                                '17': '暴雪',
+                                '18': '雨夹雪',
+                                '19': '阵雨',
+                                '20': '雷阵雨',
+                                '21': '小到中雨',
+                                '22': '中到大雨',
+                                '23': '大到暴雨',
+                                '24': '暴雨到大暴雨',
+                                '25': '大暴雨到特大暴雨',
+                                '26': '小到中雪',
+                                '27': '中到大雪',
+                                '28': '大到暴雪',
+                                '29': '浮尘',
+                                '30': '扬沙',
+                                '31': '沙尘暴',
+                                '32': '强沙尘暴',
+                                '53': '霾',
+                                '99': '未知'
+                            };
+                            return weatherMap[code] || '未知';
+                        }
+
+                        const now = new Date();
+                        const hour = now.getHours();
+                        const isDaytime = hour >= 6 && hour < 18;
+
+                        resolve({
+                            status: 200,
+                            current: {
+                                temperature: weatherData.current.temperature.value,
+                                unit: weatherData.current.temperature.unit,
+                                weatherCode: '0',
+                                isDaytime: isDaytime
+                            }
+                        });
                     } catch (error) {
                         reject(new Error('解析天气数据失败: ' + error.message))
                     }

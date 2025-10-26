@@ -135,23 +135,25 @@ const fetchTodayWeather = async () => {
         if (!weatherData || weatherData.status !== 200) {
             throw new Error('获取天气数据失败')
         }
-        const todayForecast = weatherData?.data?.forecast?.[0]
-        if (!todayForecast) {
+        const current = weatherData?.current
+        if (!current) {
             throw new Error('天气预报数据不可用')
         }
 
         // 提取天气类型、最高温和最低温
-        const weatherType = todayForecast.type
-        const highTemp = todayForecast.high.replace('高温 ', '').replace('℃', '')
-        const lowTemp = todayForecast.low.replace('低温 ', '').replace('℃', '')
+        const weatherType = current.weatherCode || '0'
+        const temperature = current.temperature
 
-        // 设置天气图标
-        weatherIcon.value = getWeatherIconCode(weatherType)
+        // 获取白天/夜晚状态
+        const isDaytime = current.isDaytime ?? true
 
-        todayWeather.value = `${highTemp}~${lowTemp}℃`
+        // 始终显示晴天图标，根据时间区分早晚
+        weatherIcon.value = isDaytime ? '100' : '150'
+
+        todayWeather.value = `${temperature}℃`
     } catch (error) {
         todayWeather.value = '天气获取失败'
-        weatherIcon.value = '999' // 未知天气图标
+        weatherIcon.value = '999'
     }
 }
 
