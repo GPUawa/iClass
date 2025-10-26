@@ -106,11 +106,9 @@ function registerIPC() {
 
             https.get(url, (response) => {
                 let data = ''
-
                 response.on('data', (chunk) => {
                     data += chunk
                 })
-
                 response.on('end', () => {
                     try {
                         const weatherData = JSON.parse(data)
@@ -137,12 +135,11 @@ function registerIPC() {
         })
     })
 
-    // 添加显示/隐藏窗口的IPC处理程序
+    // ipc: 显示/隐藏窗口
     ipcMain.handle('window:toggle', () => {
         if (!global.mainWindow) return { success: false, error: '窗口不存在' }
-
         try {
-            // 发送消息给渲染进程，让其控制界面显示/隐藏
+            // 发给前端控制窗口显示/隐藏
             global.mainWindow.webContents.send('toggle-app-visibility')
             return { success: true }
         } catch (error) {
@@ -163,13 +160,4 @@ app.whenReady().then(() => {
 
     createWindow()
     createTray()
-})
-
-// 确保在所有窗口关闭时退出应用
-app.on('window-all-closed', () => {
-    // 在macOS上，除非用户使用Cmd + Q明确退出
-    // 否则保持应用和菜单栏处于活动状态
-    if (process.platform !== 'darwin') {
-        app.quit()
-    }
 })
