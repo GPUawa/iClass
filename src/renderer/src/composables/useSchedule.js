@@ -1,12 +1,19 @@
+/**
+ * @author GPUawa
+ * @since 2025/10/24
+ * @license GPL-3.0
+ * @description 课表加载组件
+ */
+
 import { ref, computed } from 'vue'
 
-// 课表相关状态
+// 课表状态设置
 const todayClasses = ref([])
 const loading = ref(false)
 const error = ref(null)
 const currentDate = ref(new Date())
 
-// 计算今日课表显示文本
+// 课表显示文本
 const todaySchedule = computed(() => {
     if (loading.value) return "加载中..."
     if (error.value) return "加载失败"
@@ -34,10 +41,11 @@ const fetchTodayClasses = async () => {
     }
 }
 
-// 检查日期变化，如果日期改变则重新加载课表
+// 检查日期变化
 const checkDateChange = () => {
     const oldDate = new Date(currentDate.value)
     currentDate.value = new Date()
+    // 日期变化则重载课表
     if (oldDate.getDate() !== currentDate.value.getDate()) {
         fetchTodayClasses()
     }
