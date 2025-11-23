@@ -8,17 +8,17 @@
     "scripts": {
         "start": "electron-vite preview",
         "dev": "electron-vite dev",
+        "format": "prettier --write .",
+        "format:check": "prettier --check .",
+        "format:staged": "prettier --write --list-different",
+        "lint": "eslint --ext .js,.vue,.ts .",
+        "lint:fix": "eslint --fix --ext .js,.vue,.ts .",
         "build": "electron-vite build",
         "postinstall": "electron-builder install-app-deps",
         "build:unpack": "npm run build && electron-builder --dir",
         "build:win": "npm run build && electron-builder --win",
         "build:mac": "npm run build && electron-builder --mac",
-        "build:linux": "npm run build && electron-builder --linux",
-        "format": "prettier --write .",
-        "format:check": "prettier --check .",
-        "format:staged": "prettier --write --list-different",
-        "lint": "eslint --ext .js,.vue,.ts .",
-        "lint:fix": "eslint --fix --ext .js,.vue,.ts ."
+        "build:linux": "npm run build && electron-builder --linux"
     },
     "build": {
         "nsis": {
