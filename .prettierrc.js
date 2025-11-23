@@ -26,11 +26,6 @@ module.exports = {
     // 是否在对象字面量、数组元素等之间打印空格
     bracketSpacing: true,
 
-    // JSX 标签括号位置
-    // true - 将多行 JSX 元素的 > 放在最后一行的末尾
-    // false - 将 > 单独放在一行
-    jsxBracketSameLine: false,
-
     // JSX 中是否使用单引号
     jsxSingleQuote: true,
 
