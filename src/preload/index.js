@@ -10,4 +10,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
         ipcRenderer.on('toggle-app-visibility', callback);
     },
     toggleAppVisibility: () => ipcRenderer.invoke('window:toggle'),
+    onOpenSettings: callback => {
+        ipcRenderer.on('open-settings', callback);
+    },
 });

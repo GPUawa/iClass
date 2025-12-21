@@ -14,7 +14,7 @@ const https = require('https');
 
 let cses;
 
-// 创建窗口
+// 创建主窗口
 function createWindow() {
     const mainWindow = new BrowserWindow({
         x: 0,
@@ -54,17 +54,65 @@ function createWindow() {
         mainWindow.loadFile(join(__dirname, '../renderer/index.html'));
     }
 
-    // 保存窗口引用以便全局访问
     global.mainWindow = mainWindow;
 
     return mainWindow;
 }
 
-// 显示/隐藏窗口功能
+// 创建设置窗口
+function createSettingsWindow() {
+    if (global.settingsWindow && !global.settingsWindow.isDestroyed()) {
+        global.settingsWindow.focus();
+        return global.settingsWindow;
+    }
+    const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+    const settingsWindow = new BrowserWindow({
+        width: width * 0.7,
+        height: height * 0.7,
+        minWidth: 800,
+        minHeight: 600,
+        minimizable: true,
+        maximizable: true,
+        resizable: true,
+        show: false,
+        modal: false,
+        autoHideMenuBar: true,
+        center: true,
+        webPreferences: {
+            preload: join(__dirname, '../preload/index.js'),
+            sandbox: false,
+            nodeIntegration: false,
+            contextIsolation: true,
+            enableRemoteModule: false,
+        },
+        ...(process.platform === 'linux' ? { icon } : {}),
+    });
+
+    settingsWindow.on('ready-to-show', () => {
+        settingsWindow.center();
+        settingsWindow.show();
+    });
+
+    settingsWindow.on('closed', () => {
+        global.settingsWindow = null;
+    });
+
+    if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
+        settingsWindow.loadURL(`${process.env['ELECTRON_RENDERER_URL']}#/settings`);
+    } else {
+        settingsWindow.loadFile(join(__dirname, '../renderer/index.html'), {
+            hash: '/settings',
+        });
+    }
+
+    global.settingsWindow = settingsWindow;
+
+    return settingsWindow;
+}
+
+// 显示/隐藏窗口
 function showHideWindow() {
     if (!global.mainWindow) return;
-
-    // 发送消息给渲染进程，让其控制界面显示/隐藏
     global.mainWindow.webContents.send('toggle-app-visibility');
 }
 
@@ -76,6 +124,12 @@ function createTray() {
             label: '👀 显示/隐藏',
             click: () => {
                 showHideWindow();
+            },
+        },
+        {
+            label: '⚙️ 设置',
+            click: () => {
+                createSettingsWindow();
             },
         },
         { type: 'separator' },

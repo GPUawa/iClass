@@ -42,13 +42,16 @@
     "dependencies": {
         "@electron-toolkit/preload": "^3.0.2",
         "@electron-toolkit/utils": "^4.0.0",
+        "@vicons/ionicons5": "^0.13.0",
         "electron-updater": "^6.3.9",
-        "js-yaml": "^4.1.0"
+        "js-yaml": "^4.1.0",
+        "vue-router": "^4.6.4"
     },
     "devDependencies": {
         "@electron-toolkit/eslint-config": "^2.1.0",
         "@electron-toolkit/eslint-config-prettier": "^3.0.0",
         "@types/js-yaml": "^4.0.9",
+        "@vicons/ionicons5": "^0.12.0",
         "@vitejs/plugin-vue": "^6.0.1",
         "electron": "^22.3.27",
         "electron-builder": "^25.1.8",

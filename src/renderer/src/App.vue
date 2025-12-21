@@ -1,80 +1,33 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import './assets/main.css';
 import './assets/qweather-icons.css';
-import { useWeather } from './composables/useWeather.js';
-import { useSchedule } from './composables/useSchedule.js';
 
-const headerVisible = ref(false);
-const appVisible = ref(true); // 控制整个应用的可见性
+const router = useRouter();
 
-const { todayWeather, weatherIcon, fetchTodayWeather } = useWeather();
-const { currentDate, todaySchedule, scheduleItems, fetchTodayClasses, checkDateChange } =
-    useSchedule();
-
-// 切换应用显示/隐藏
-const toggleAppVisibility = () => {
-    appVisible.value = !appVisible.value;
+// 打开设置页面
+const openSettings = () => {
+    router.push('/settings');
 };
 
-// 监听来自主进程的显示/隐藏请求
-window.electronAPI.onToggleAppVisibility(() => {
-    toggleAppVisibility();
-});
-
-onMounted(async () => {
-    setTimeout(() => {
-        headerVisible.value = true;
-    }, 100);
-
-    await fetchTodayClasses();
-    await fetchTodayWeather();
-
-    setInterval(() => {
-        checkDateChange();
-    }, 1000);
-
-    setInterval(() => {
-        checkDateChange();
-    }, 600000);
+// 监听来自主进程的打开设置请求
+onMounted(() => {
+    window.electronAPI.onOpenSettings(() => {
+        openSettings();
+    });
 });
 </script>
 
 <template>
-    <div class="app-container" :class="{ 'app-hidden': !appVisible }">
-        <div class="header-bars" :class="{ visible: headerVisible }">
-            <div class="weather">
-                <i v-if="weatherIcon" :class="`qi qi-${weatherIcon}`"></i>
-                &nbsp;{{ todayWeather }}
-            </div>
-            <div class="schedule">
-                <template v-if="scheduleItems.length > 0">
-                    <span
-                        v-for="(item, index) in scheduleItems"
-                        :key="index"
-                        :class="{ 'current-class': item.isCurrentClass }"
-                    >
-                        {{ item.subject }}
-                        <template v-if="index < scheduleItems.length - 1">&nbsp;</template>
-                    </span>
-                </template>
-                <template v-else>
-                    {{ todaySchedule }}
-                </template>
-            </div>
-            <div class="time">
-                {{
-                    currentDate.toLocaleTimeString('zh-CN', {
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        hour12: false,
-                    })
-                }}
-                {{ (currentDate.getMonth() + 1).toString().padStart(2, '0') }}/{{
-                    currentDate.getDate().toString().padStart(2, '0')
-                }}
-                - 周{{ ['日', '一', '二', '三', '四', '五', '六'][currentDate.getDay()] }}
-            </div>
-        </div>
+    <div class="app-container">
+        <router-view />
     </div>
 </template>
+
+<style scoped>
+.app-container {
+    width: 100%;
+    height: 100%;
+}
+</style>
