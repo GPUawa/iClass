@@ -55,11 +55,10 @@ onMounted(async () => {
                         hour12: false,
                     })
                 }}
-                |
                 {{ (currentDate.getMonth() + 1).toString().padStart(2, '0') }}/{{
                     currentDate.getDate().toString().padStart(2, '0')
                 }}
-                周{{ ['日', '一', '二', '三', '四', '五', '六'][currentDate.getDay()] }}
+                - 周{{ ['日', '一', '二', '三', '四', '五', '六'][currentDate.getDay()] }}
             </div>
         </div>
     </div>
