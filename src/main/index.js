@@ -122,7 +122,7 @@ function registerIPC() {
                                 current: {
                                     temperature: weatherData.current.temperature.value,
                                     unit: weatherData.current.temperature.unit,
-                                    weatherCode: '0',
+                                    weatherCode: weatherData.current.weather,
                                     isDaytime: isDaytime,
                                 },
                             });

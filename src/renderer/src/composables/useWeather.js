@@ -27,23 +27,19 @@ const fetchTodayWeather = async () => {
         const weatherCode = current.weatherCode || '0';
         // 温度
         const temperature = current.temperature;
-        // 早晚状态
-        const isDaytime = current.isDaytime ?? true;
-        // 天气类型
-        const weatherType = getWeatherTypeFromCode(weatherCode);
+        // 早晚状态（由后端计算）
+        const isDaytime = current.isDaytime;
 
-        //判断白天还是夜间
-        const now = new Date();
-        const hour = now.getHours();
-        const isNight = hour < 6 || hour >= 18;
-        const night = isDaytime === undefined ? isNight : !isDaytime;
-        // 根据时间选择映射表
-        const weatherMap = night ? nightWeatherMap : dayWeatherMap;
+        // 根据天气代码和日夜状态选择图标
+        const weatherType = getWeatherTypeFromCode(weatherCode);
+        const weatherMap = isDaytime ? dayWeatherMap : nightWeatherMap;
         weatherIcon.value = weatherMap[weatherType] || '999';
 
+        // 设置温度显示
         todayWeather.value = `${temperature}℃`;
     } catch (error) {
-        todayWeather.value = `天气获取失败: ${error}`;
+        console.error('天气获取失败:', error);
+        todayWeather.value = '天气获取失败';
         weatherIcon.value = '999';
     }
 };

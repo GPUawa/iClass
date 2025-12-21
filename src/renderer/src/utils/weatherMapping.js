@@ -3,6 +3,7 @@ export const getWeatherTypeFromCode = weatherCode => {
     const weatherCodeMap = {
         0: '晴',
         1: '多云',
+        2: '阴',
         7: '小雨',
         8: '中雨',
         22: '大雨',
