@@ -46,7 +46,7 @@ onMounted(async () => {
                 <i :v-if="weatherIcon" class="`qi qi-${weatherIcon}`"></i>
                 &nbsp; {{ todayWeather }}
             </div>
-            <div class="schedule">{{ todaySchedule }}</div>
+            <div class="schedule" v-html="todaySchedule"></div>
             <div class="time">
                 {{
                     currentDate.toLocaleTimeString('zh-CN', {

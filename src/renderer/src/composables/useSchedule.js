@@ -13,6 +13,19 @@ const loading = ref(false);
 const error = ref(null);
 const currentDate = ref(new Date());
 
+// 检查当前是否在上课以及当前课程
+const currentClass = computed(() => {
+    if (loading.value || error.value || !todayClasses.value.length) return null;
+
+    const now = new Date();
+    const currentTime = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:00`;
+
+    // 查找当前正在进行的课程
+    return todayClasses.value.find(cls => {
+        return currentTime >= cls.start_time && currentTime <= cls.end_time;
+    });
+});
+
 // 课表显示文本
 const todaySchedule = computed(() => {
     if (loading.value) return '加载中...';
@@ -21,9 +34,12 @@ const todaySchedule = computed(() => {
 
     return todayClasses.value
         .map(cls => {
-            return cls.subject.slice(0, 1);
+            // 如果是当前正在进行的课程，添加标记
+            const isCurrentClass = currentClass.value && cls.subject === currentClass.value.subject;
+            const subject = cls.subject.slice(0, 1);
+            return isCurrentClass ? `<span class="current-class"> ${subject} </span>` : subject;
         })
-        .join(' ');
+        .join('&nbsp;');
 });
 
 // 获取今日课表
@@ -60,6 +76,7 @@ export function useSchedule() {
         error,
         currentDate,
         todaySchedule,
+        currentClass,
         fetchTodayClasses,
         checkDateChange,
     };
