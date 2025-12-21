@@ -39,7 +39,7 @@ const todaySchedule = computed(() => {
             const subject = cls.subject.slice(0, 1);
             return isCurrentClass ? `<span class="current-class"> ${subject} </span>` : subject;
         })
-        .join('&nbsp;');
+        .join('&nbsp;&nbsp;');
 });
 
 // 获取今日课表

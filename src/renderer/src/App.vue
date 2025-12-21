@@ -44,7 +44,7 @@ onMounted(async () => {
         <div class="header-bars" :class="{ visible: headerVisible }">
             <div class="weather">
                 <i v-if="weatherIcon" :class="`qi qi-${weatherIcon}`"></i>
-                &nbsp; {{ todayWeather }}
+                &nbsp;{{ todayWeather }}
             </div>
             <div class="schedule" v-html="todaySchedule"></div>
             <div class="time">
