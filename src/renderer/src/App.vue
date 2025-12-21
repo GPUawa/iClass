@@ -43,7 +43,7 @@ onMounted(async () => {
     <div class="app-container" :class="{ 'app-hidden': !appVisible }">
         <div class="header-bars" :class="{ visible: headerVisible }">
             <div class="weather">
-                <i :v-if="weatherIcon" class="`qi qi-${weatherIcon}`"></i>
+                <i v-if="weatherIcon" :class="`qi qi-${weatherIcon}`"></i>
                 &nbsp; {{ todayWeather }}
             </div>
             <div class="schedule" v-html="todaySchedule"></div>
