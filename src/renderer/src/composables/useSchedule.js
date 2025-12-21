@@ -27,19 +27,26 @@ const currentClass = computed(() => {
 });
 
 // 课表显示文本
-const todaySchedule = computed(() => {
+const todayScheduleText = computed(() => {
     if (loading.value) return '加载中...';
     if (error.value) return '加载失败';
     if (!todayClasses.value.length) return '今日无课程';
+    return '今日有课程';
+});
 
-    return todayClasses.value
-        .map(cls => {
-            // 如果是当前正在进行的课程，添加标记
-            const isCurrentClass = currentClass.value && cls.subject === currentClass.value.subject;
-            const subject = cls.subject.slice(0, 1);
-            return isCurrentClass ? `<span class="current-class"> ${subject} </span>` : subject;
-        })
-        .join('&nbsp;&nbsp;');
+// 课表结构化数据
+const scheduleItems = computed(() => {
+    if (loading.value || error.value || !todayClasses.value.length) return [];
+    
+    return todayClasses.value.map(cls => {
+        // 如果是当前正在进行的课程，添加标记
+        const isCurrentClass = currentClass.value && cls.subject === currentClass.value.subject;
+        const subject = cls.subject.slice(0, 1);
+        return {
+            subject,
+            isCurrentClass
+        };
+    });
 });
 
 // 获取今日课表
@@ -75,7 +82,8 @@ export function useSchedule() {
         loading,
         error,
         currentDate,
-        todaySchedule,
+        todaySchedule: todayScheduleText,
+        scheduleItems,
         currentClass,
         fetchTodayClasses,
         checkDateChange,

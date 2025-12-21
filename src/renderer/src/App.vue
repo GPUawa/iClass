@@ -9,7 +9,8 @@ const headerVisible = ref(false);
 const appVisible = ref(true); // 控制整个应用的可见性
 
 const { todayWeather, weatherIcon, fetchTodayWeather } = useWeather();
-const { currentDate, todaySchedule, fetchTodayClasses, checkDateChange } = useSchedule();
+const { currentDate, todaySchedule, scheduleItems, fetchTodayClasses, checkDateChange } =
+    useSchedule();
 
 // 切换应用显示/隐藏
 const toggleAppVisibility = () => {
@@ -46,7 +47,21 @@ onMounted(async () => {
                 <i v-if="weatherIcon" :class="`qi qi-${weatherIcon}`"></i>
                 &nbsp;{{ todayWeather }}
             </div>
-            <div class="schedule" v-html="todaySchedule"></div>
+            <div class="schedule">
+                <template v-if="scheduleItems.length > 0">
+                    <span
+                        v-for="(item, index) in scheduleItems"
+                        :key="index"
+                        :class="{ 'current-class': item.isCurrentClass }"
+                    >
+                        {{ item.subject }}
+                        <template v-if="index < scheduleItems.length - 1">&nbsp;</template>
+                    </span>
+                </template>
+                <template v-else>
+                    {{ todaySchedule }}
+                </template>
+            </div>
             <div class="time">
                 {{
                     currentDate.toLocaleTimeString('zh-CN', {
