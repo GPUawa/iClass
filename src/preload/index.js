@@ -13,4 +13,9 @@ contextBridge.exposeInMainWorld('electronAPI', {
     onOpenSettings: callback => {
         ipcRenderer.on('open-settings', callback);
     },
+    settingsWindow: {
+        minimize: () => ipcRenderer.invoke('settings:minimize'),
+        maximize: () => ipcRenderer.invoke('settings:maximize'),
+        close: () => ipcRenderer.invoke('settings:close'),
+    },
 });

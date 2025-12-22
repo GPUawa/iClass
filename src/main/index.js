@@ -74,6 +74,7 @@ function createSettingsWindow() {
         minimizable: true,
         maximizable: true,
         resizable: true,
+        frame: false,
         show: false,
         modal: false,
         autoHideMenuBar: true,
@@ -197,6 +198,42 @@ function registerIPC() {
         try {
             // 发给前端控制窗口显示/隐藏
             global.mainWindow.webContents.send('toggle-app-visibility');
+            return { success: true };
+        } catch (error) {
+            return { success: false, error: error.message };
+        }
+    });
+
+    // ipc: 设置窗口控制
+    ipcMain.handle('settings:minimize', () => {
+        if (!global.settingsWindow) return { success: false, error: '设置窗口不存在' };
+        try {
+            global.settingsWindow.minimize();
+            return { success: true };
+        } catch (error) {
+            return { success: false, error: error.message };
+        }
+    });
+
+    ipcMain.handle('settings:maximize', () => {
+        if (!global.settingsWindow) return { success: false, error: '设置窗口不存在' };
+        try {
+            if (global.settingsWindow.isMaximized()) {
+                global.settingsWindow.unmaximize();
+                return { success: true, maximized: false };
+            } else {
+                global.settingsWindow.maximize();
+                return { success: true, maximized: true };
+            }
+        } catch (error) {
+            return { success: false, error: error.message };
+        }
+    });
+
+    ipcMain.handle('settings:close', () => {
+        if (!global.settingsWindow) return { success: false, error: '设置窗口不存在' };
+        try {
+            global.settingsWindow.close();
             return { success: true };
         } catch (error) {
             return { success: false, error: error.message };
