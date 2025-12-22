@@ -29,7 +29,7 @@ function createWindow() {
         ...(process.platform === 'linux' ? { icon } : {}),
         webPreferences: {
             preload: join(__dirname, '../preload/index.js'),
-            sandbox: false,
+            sandbox: true,
             nodeIntegration: false,
             contextIsolation: true,
             enableRemoteModule: false,
@@ -81,7 +81,7 @@ function createSettingsWindow() {
         center: true,
         webPreferences: {
             preload: join(__dirname, '../preload/index.js'),
-            sandbox: false,
+            sandbox: true,
             nodeIntegration: false,
             contextIsolation: true,
             enableRemoteModule: false,
