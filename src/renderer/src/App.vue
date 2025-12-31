@@ -13,7 +13,7 @@ const openSettings = () => {
 
 // 监听来自主进程的打开设置请求
 onMounted(() => {
-    window.electronAPI.onOpenSettings(() => {
+    window.electronAPI.app.onOpenSettings(() => {
         openSettings();
     });
 });

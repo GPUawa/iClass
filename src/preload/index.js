@@ -252,8 +252,4 @@ contextBridge.exposeInMainWorld('electronAPI', {
     window: windowAPI,
     settingsWindow: settingsWindowAPI,
     app: appAPI,
-    // 保留旧的API以保持向后兼容
-    toggleAppVisibility: windowAPI.toggle,
-    onToggleAppVisibility: windowAPI.onToggleVisibility,
-    onOpenSettings: appAPI.onOpenSettings,
 });

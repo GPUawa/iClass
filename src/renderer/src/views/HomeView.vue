@@ -16,7 +16,7 @@ const toggleAppVisibility = () => {
 };
 
 // 监听来自主进程的显示/隐藏请求
-window.electronAPI.onToggleAppVisibility(() => {
+window.electronAPI.window.onToggleVisibility(() => {
     toggleAppVisibility();
 });
 
