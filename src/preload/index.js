@@ -155,29 +155,6 @@ const scheduleAPI = {
 };
 
 /**
- * 天气相关API
- */
-const weatherAPI = {
-    /**
-     * 获取今日天气
-     * @returns {Promise<WeatherData>} 天气数据
-     * @throws {Error} 当请求失败时抛出错误
-     */
-    async getTodayWeather() {
-        try {
-            const result = await ipcRenderer.invoke('weather:getTodayWeather');
-            if (!result || result.status !== 200) {
-                throw new Error(result?.error || 'Failed to fetch weather data');
-            }
-            return result;
-        } catch (error) {
-            console.error('Failed to get weather:', error);
-            throw error;
-        }
-    },
-};
-
-/**
  * 窗口控制API
  */
 const windowAPI = {
@@ -272,12 +249,10 @@ const appAPI = {
 // 向渲染进程暴露API
 contextBridge.exposeInMainWorld('electronAPI', {
     schedule: scheduleAPI,
-    weather: weatherAPI,
     window: windowAPI,
     settingsWindow: settingsWindowAPI,
     app: appAPI,
     // 保留旧的API以保持向后兼容
-    fetchWeather: weatherAPI.getTodayWeather,
     toggleAppVisibility: windowAPI.toggle,
     onToggleAppVisibility: windowAPI.onToggleVisibility,
     onOpenSettings: appAPI.onOpenSettings,

@@ -15,31 +15,43 @@ const weatherIcon = ref('');
 // 获取今日天气
 const fetchTodayWeather = async () => {
     try {
-        const weatherData = await window.electronAPI.fetchWeather();
-        if (!weatherData || weatherData.status !== 200) {
-            throw new Error('获取天气数据失败');
+        const url =
+            'https://weatherapi.market.xiaomi.com/wtr-v3/weather/all?latitude=0&longitude=0&locationKey=weathercn%3A101010100&appKey=weather20151024&sign=zUFJoAR2ZVrDy1vF3D07&isGlobal=false&locale=zh_cn';
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error(`网络请求失败: ${response.statusText}`);
         }
+
+        const weatherData = await response.json();
+
         const current = weatherData?.current;
         if (!current) {
             throw new Error('天气预报数据不可用');
         }
-        // 天气代码
-        const weatherCode = current.weatherCode || '0';
-        // 温度
-        const temperature = current.temperature;
-        // 早晚状态（由后端计算）
-        const isDaytime = current.isDaytime;
 
-        // 根据天气代码和日夜状态选择图标
+        const weatherCode = current.weather || '0';
+        const temperature = current.temperature?.value;
+
+        if (temperature === undefined) {
+            throw new Error('无法获取温度信息');
+        }
+
+        // 计算日夜
+        const now = new Date();
+        const hour = now.getHours();
+        const isDaytime = hour >= 6 && hour < 18;
+
+        // 选择图标
         const weatherType = getWeatherTypeFromCode(weatherCode);
         const weatherMap = isDaytime ? dayWeatherMap : nightWeatherMap;
         weatherIcon.value = weatherMap[weatherType] || '999';
 
-        // 设置温度显示
+        // 温度显示
         todayWeather.value = `${temperature}℃`;
     } catch (error) {
         console.error('天气获取失败:', error);
-        todayWeather.value = '天气获取失败';
+        todayWeather.value = `天气获取失败: ${error.message}`;
         weatherIcon.value = '999';
     }
 };
